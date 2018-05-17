@@ -9,7 +9,11 @@ RUN echo "http://nl.alpinelinux.org/alpine/edge/main" >>/etc/apk/repositories \
  && echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >>/etc/apk/repositories \
  && echo "@testing http://nl.alpinelinux.org/alpine/edge/testing" >>/etc/apk/repositories \
  && apk update \
+ && apk add --upgrade apk-tools \
  && apk add py3-dateutil py3-numpy@community py3-psycopg2 py3-raven@community py3-requests su-exec openssl \
+ && pip install --upgrade pip \
+ && pip install rethinkdb \
+ && python -c "import rethinkdb" \
  && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
  && tar -C /usr/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
  && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
